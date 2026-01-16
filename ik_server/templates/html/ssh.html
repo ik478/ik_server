@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web SSH</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+     <link rel="stylesheet" href="..\css\style.css">
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <h2>SSH Terminal</h2>
+
+    <input id="cmd" placeholder="Enter command" />
+    <button onclick="sendCmd()">Run</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        const socket = io();
+
+        function sendCmd() {
+            let cmd = document.getElementById("cmd").value;
+            socket.emit("command", cmd);
+        }
+
+        socket.on("output", function(data) {
+            document.getElementById("output").innerText += data + "\n";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+:root {
+    --colorBlack: #0a0a0f;
+    --colorLight: #00bebe;
+    --colorDamnLight: #00dcdc;
+    --colorWhite: #ffffff;
+    --fontSize: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background: url('http://aaronchuo.cc/assets/images/ironwall.jpg') var(--colorBlack) top center no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    letter-spacing: .1em;
+    color: var(--colorLight);
+    overflow-x: hidden;
+}
+
+/* Grid Background */
+.grid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(0deg, transparent 24%, rgba(0, 190, 190, 0.05) 25%, rgba(0, 190, 190, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 190, 190, 0.05) 75%, rgba(0, 190, 190, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 190, 190, 0.05) 25%, rgba(0, 190, 190, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 190, 190, 0.05) 75%, rgba(0, 190, 190, 0.05) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+    z-index: 0;
+}
+
+/* Sci-fi Container */
+.scifiUI {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 2rem;
+    font-size: var(--fontSize);
+    color: var(--colorLight);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   RADIAL MENU STYLES
+   ============================================ */
+
+/* Disc Menu Container */
+.disc-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2000;
+}
+
+/* Main Disc with Time */
+.disc {
+    width: 120px;
+    height: 120px;
+    background: rgba(0, 190, 190, 0.2);
+    border: 3px solid var(--colorLight);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 0 12px var(--colorLight);
+    font-size: 11px;
+    line-height: 1.2;
+    position: relative;
+    z-index: 100;
+}
+
+.disc:hover {
+    border-color: var(--colorDamnLight);
+    box-shadow: 0 0 20px var(--colorDamnLight);
+    background: rgba(0, 220, 220, 0.3);
+}
+
+.disc-time {
+    color: var(--colorDamnLight);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.disc-date {
+    color: var(--colorLight);
+    font-size: 12px;
+}
+
+.disc.active {
+    border-color: var(--colorDamnLight);
+    box-shadow: 0 0 20px var(--colorDamnLight) inset,
+                0 0 20px var(--colorDamnLight);
+}
+
+/* Menu Holder */
+div.menuHolder {
+    user-select: none;
+    position: absolute;
+    top: -90px;
+    left: -90px;
+    margin: 0;
+    pointer-events: none;
+}
+
+div.menuHolder svg.menu {
+    pointer-events: all;
+}
+
+/* SVG Menu Base */
+svg.menu {
+    position: absolute;
+    overflow: visible;
+    transition: 0.3s;
+    transition-timing-function: ease-out;
+    cursor: grab;
+}
+
+svg.menu:active {
+    cursor: grabbing;
+}
+
+/* Menu Animation States */
+svg.menu.inner {
+    transform: scale(0.66) rotate(-15deg);
+    opacity: 0;
+    visibility: hidden;
+}
+
+svg.menu.outer {
+    transform: scale(1.5) rotate(15deg);
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Ring Structure */
+svg.menu > g.ring-structure > path {
+    fill: rgba(0, 190, 190, 0.15);
+    stroke: var(--colorLight);
+    stroke-width: 0.3;
+    filter: drop-shadow(0 0 3px rgba(0, 190, 190, 0.5));
+}
+
+/* Divider Lines */
+svg.menu > g.ring-structure > line.divider {
+    stroke: rgba(0, 190, 190, 0.3);
+    stroke-width: 0.3;
+}
+
+/* Menu Button Styles */
+svg.menu > g.menu-button {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Button Background */
+svg.menu > g.menu-button > rect.button-bg {
+    fill: rgba(255, 255, 255, 0.95);
+    stroke: rgba(0, 190, 190, 0.3);
+    stroke-width: 0.3;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+    transition: all 0.2s ease-in-out;
+}
+
+/* Button Text */
+svg.menu > g.menu-button > text.button-text {
+    fill: var(--colorLight);
+    pointer-events: none;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Button Hover State */
+svg.menu > g.menu-button:hover > rect.button-bg {
+    fill: rgba(0, 220, 220, 0.2);
+    stroke: var(--colorDamnLight);
+    stroke-width: 0.5;
+    filter: drop-shadow(0 0 8px var(--colorDamnLight));
+}
+
+svg.menu > g.menu-button:hover > text.button-text {
+    fill: var(--colorDamnLight);
+}
+
+/* Button Selected State */
+svg.menu > g.menu-button.selected > rect.button-bg {
+    fill: rgba(0, 190, 190, 0.4);
+    stroke: var(--colorDamnLight);
+    stroke-width: 0.6;
+    filter: drop-shadow(0 0 10px var(--colorDamnLight));
+}
+
+svg.menu > g.menu-button.selected > text.button-text {
+    fill: var(--colorWhite);
+    font-weight: bold;
+}
+
+/* Center Button Styles */
+svg.menu > g.center-button {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Center Button Background */
+svg.menu > g.center-button > circle.center-bg {
+    fill: rgba(0, 190, 190, 0.2);
+    stroke: var(--colorLight);
+    stroke-width: 0.5;
+    filter: drop-shadow(0 0 3px rgba(0, 190, 190, 0.5));
+    transition: all 0.2s ease-in-out;
+}
+
+/* Center Button Icon (X) */
+svg.menu > g.center-button > line.center-icon {
+    stroke: var(--colorWhite);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Center Button Hover */
+svg.menu > g.center-button:hover > circle.center-bg {
+    fill: rgba(0, 220, 220, 0.4);
+    stroke: var(--colorDamnLight);
+    filter: drop-shadow(0 0 8px var(--colorDamnLight));
+}
+
+svg.menu > g.center-button:hover > line.center-icon {
+    stroke: var(--colorDamnLight);
+}
+
+/* Text Label Styles (Alternative/Legacy) */
+svg.menu > g.text-label {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+svg.menu > g.text-label > text {
+    fill: var(--colorWhite);
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
+    pointer-events: none;
+}
+
+svg.menu > g.text-label:hover > text {
+    fill: var(--colorDamnLight);
+    filter: drop-shadow(0 0 5px var(--colorDamnLight));
+}
+
+svg.menu > g.text-label.selected > text {
+    fill: var(--colorDamnLight);
+    filter: drop-shadow(0 0 8px var(--colorDamnLight));
+}
+
+/* ============================================
+   END RADIAL MENU STYLES
+   ============================================ */
+
+/* Heading */
+h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px var(--colorDamnLight);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px var(--colorLight), 0 0 20px var(--colorLight), 0 0 30px var(--colorLight);
+    }
+    to {
+        text-shadow: 0 0 20px var(--colorLight), 0 0 30px var(--colorDamnLight), 0 0 40px var(--colorDamnLight);
+    }
+}
+
+/* Button Styles */
+button {
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+    height: 50px;
+    border: 1px solid var(--colorLight);
+    background: rgba(0, 190, 190, 0.2);
+    color: var(--colorLight);
+    font-family: 'Courier New', monospace;
+    font-size: var(--fontSize);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 250ms ease-in-out;
+}
+
+button:hover {
+    box-shadow: 0 0 12px var(--colorDamnLight) inset,
+                0 0 12px var(--colorDamnLight);
+    color: var(--colorDamnLight);
+    background: rgba(0, 220, 220, 0.3);
+}
+
+button:active {
+    box-shadow: 0 0 20px var(--colorDamnLight) inset,
+                0 0 10px var(--colorDamnLight),
+                0 0 20px var(--colorWhite);
+    color: var(--colorBlack);
+    background: var(--colorDamnLight);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent 70%);
+    opacity: 0;
+    transition: all 500ms ease-in-out;
+}
+
+button:hover::before {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .scifiUI {
+        padding: 1rem;
+        margin: 20px auto;
+    }
+    
+    .disc-menu {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .disc {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .disc-time {
+        font-size: 16px;
+    }
+}
